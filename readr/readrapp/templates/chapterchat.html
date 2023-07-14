@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ChapterChat</title>
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css">
+    <style>
+        .title {
+            font-family: 'Read All About It', sans-serif;
+            font-size: 4em;
+            margin-bottom: 50px;
+            color: #000;
+            text-align: center;
+        }
+
+        body {
+            background-color: #fefa7d;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        h1 {
+            margin-bottom: 50px;
+        }
+        .table {
+            border-collapse: collapse;
+            width: 100%;
+            border: none;
+        }
+        th, td {
+            text-align: left;
+            padding: 8px;
+			color: #000000;
+			font-weight: 400;
+            border: none;
+        }
+        th {
+            background-color: #D1DCE2;
+            color: #000000;
+            font-weight: 700;
+        }
+        .btn-download {
+            display: inline-block;
+            background-color: #000000;
+            color: #FFFFFF;
+            border-radius: 10px;
+            padding: 5px 10px;
+            text-decoration: none;
+            margin-right: 10px;
+            transition: all 0.3s ease;
+        }
+        .btn-download:hover {
+            background-color: #1c1c1c;
+            color: #FFFFFF;
+            transform: translateY(-3px);
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        .button-wrapper {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 30px;
+            background-color: rgba(0,0,0,0.8);
+        }
+
+        .button-wrapper form input[type="text"] {
+    width: 70%; /* Increase the width of the text field */
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    font-size: 1.2em;
+    
+}
+
+
+.button-wrapper button {
+    background-color: #000;
+    color: #fff;
+    margin-right: 40px;
+    padding: 0.5em 1em;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.button-wrapper button:hover {
+    background-color: #fefa7d;
+    color: #000000;
+    transform: scale(1.1);
+}
+
+.button-wrapper button:active {
+    transform: scale(0.9);
+    box-shadow: 0 5px #666;
+    outline: none;
+}
+
+.message-form {
+  position: fixed;
+  bottom: 0;
+  top: 70%;
+  right: 0;
+  left: 25%;
+  width: 50%;
+  padding: 20px;
+  background-color: #fefa7d;
+  height: 0px; /* set the height to 50 pixels */
+}
+
+.message-form input[type="text"] {
+  width: 70%;
+  top: 50%;
+  padding: 10px;
+  border: none;
+  border-radius: 3px;
+  font-size: 1.2em;
+  margin-left: 100px; /* set the margin-left to 10px */
+}
+
+.message-form button[type="submit"] {
+  background-color: #000;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 1.2em;
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  position: absolute; /* add this property */
+  right: 20px; /* set the desired distance from the right */
+  bottom: -27px; /* set the desired distance from the bottom */
+}
+
+.message-form button[type="submit"]:hover {
+  background-color: #fefa7d;
+  color: #000000;
+  transform: scale(1.1);
+}
+
+.message-form button[type="submit"]:active {
+  transform: scale(0.9);
+  box-shadow: 0 5px #666;
+  outline: none;
+}
+
+#chat-history {
+            background-color: #f2f2f2; /* Set background color */
+            border: none; /* Remove border */
+            width: 100%;
+            height: 200px;
+            padding: 10px;
+            font-family: sans-serif;
+            font-size: 20px;
+            overflow-y: auto;
+        }
+
+</style>
+<script>
+    function changeText() {
+        var textarea = document.getElementById("chat-history");
+        var text = "Please wait while we fetch an answer for your query.";
+        var i = 0;
+        var speed = 50;
+        function type() {
+            if (i < text.length) {
+                textarea.value += text.charAt(i);
+                i++;
+                setTimeout(type, speed);
+            }
+        }
+        textarea.value = "";
+        type();
+    }
+</script>
+<body>
+    <div class="button-wrapper">
+        <form action="{% url 'home' name=name %}" method="post">{% csrf_token %}
+            <button>Back</button>
+        </form>        
+    </div>
+    <div class="message-form">
+        <form action="#" method="post">
+            <input type="text" name="message" placeholder="Ask a question" required>{% csrf_token %}
+            <input type="hidden" name="name" value="{{ name }}">
+            <button type="submit" onclick= "changeText()">Send</button>
+        </form>
+    </div>
+    <div class="container">
+        <h1 class="title">Chapter Chat</h1>
+        <textarea id="chat-history" readonly>{{ chat_response }}</textarea>
+    </div>
+</body>
+</html>

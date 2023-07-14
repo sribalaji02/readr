@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Downloads</title>
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css">
+    <style>
+        .title {
+            font-family: 'Read All About It', sans-serif;
+            font-size: 4em;
+            margin-bottom: 50px;
+            color: #000;
+            text-align: center;
+        }
+
+        body {
+            background-color: #fefa7d;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        h1 {
+            margin-bottom: 50px;
+        }
+        .table {
+            border-collapse: collapse;
+            width: 100%;
+            border: none;
+        }
+        th, td {
+            text-align: left;
+            padding: 8px;
+			color: #000000;
+			font-weight: 400;
+            border: none;
+        }
+        th {
+            background-color: #D1DCE2;
+            color: #000000;
+            font-weight: 700;
+        }
+        .btn-download {
+            display: inline-block;
+            background-color: #000000;
+            color: #FFFFFF;
+            border-radius: 20px;
+            padding: 5px 10px;
+            text-decoration: none;
+            margin-right: 10px;
+            transition: all 0.3s ease;
+        }
+        .btn-download:hover {
+            background-color: #1c1c1c;
+            color: #FFFFFF;
+            transform: translateY(-3px);
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        .button-wrapper {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 30px;
+            background-color: rgba(0,0,0,0.8);
+        }
+
+        .button-wrapper form {
+            margin: 0;
+        }
+
+        .button-wrapper button {
+            background-color: #000;
+            color: #fff;
+            margin-right: 10px;
+            padding: 0.5em 1em;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .button-wrapper button:hover {
+            background-color: #fefa7d;
+            color: #000000;
+            transform: scale(1.1);
+        }
+
+        .button-wrapper button:active {
+            transform: scale(0.9);
+            box-shadow: 0 5px #666;
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="button-wrapper">
+        <form action="{% url 'home' name=uname %}" method="post">{% csrf_token %}
+            <button>Back</button>
+        </form>
+    </div>
+    <div class="container">
+        <h1 class="title">Downloads</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th><h3>Book Name</h3></th>
+                    <th><h3>Download</h3></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in name %}
+                <tr>
+                    <td><h6>{{ i }}</h6></td>
+                    <td>
+                        {% for j in link %}
+                        	{% if forloop.parentloop.counter0 == forloop.counter0 %}
+                        {% for k in j %}
+                        <a href="{{ k }}" class="btn-download" download>Download</a>
+                        {% endfor %}
+                        	{% endif %}
+                        {% endfor %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

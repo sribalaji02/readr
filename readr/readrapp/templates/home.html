@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Welcome Page</title>
+	<style>
+		body {
+			background-color: #fefa7d;
+			font-family: 'Read All About It', sans-serif;
+			font-size: 16px;
+			line-height: 1.5;
+			margin: 0;
+			padding: 0;
+			text-align: center;
+		}
+		.title {
+		font-family: 'Read All About It', sans-serif;
+		font-size: 4em;
+		margin-bottom: 50px;
+		color: #000;
+    }
+
+	button {
+  background-color: #000;
+  color: #fff;
+  margin: 1em;
+  padding: 0.5em 1em;
+  font-size: 1.2em;
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  font-family: 'Read All About It', sans-serif;
+}
+
+
+	button:hover {
+		background-color: #fefa7d;
+        color: #000000;
+		transform: scale(1.1);
+	}
+
+	button:active {
+		transform: scale(0.9);
+		box-shadow: 0 5px #666;
+		outline: none;
+	}
+
+    .button-wrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .button-wrapper form {
+        margin: 0;
+    }
+
+    .button-wrapper button {
+        margin-right: 10px;
+    }   
+
+    .chatbot-text {
+    	font-size: 1.5em;
+    	margin-top: 30px;
+    	animation: fadeIn 1s ease-in-out;
+    }
+
+    .chatbot-title {
+    	font-size: 2em;
+    	margin-top: 50px;
+    	animation: slideInRight 1s ease-in-out;
+    }
+
+    .developed-by {
+    	font-weight: bold;
+    	margin-top: 50px;
+    	font-family: 'Read All About It', sans-serif;
+        animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes slideInRight {
+	  from {
+	    transform: translateX(100%);
+	  }
+
+	  to {
+	    transform: translateX(0%);
+	  }
+	}
+
+	.slideInRight {
+	  animation: slideInRight 1s ease-in-out;
+	}
+
+	@keyframes fadeIn {
+	  from {
+	    opacity: 0;
+	  }
+
+	  to {
+	    opacity: 1;
+	  }
+	}
+
+	.fadeIn {
+	  animation: fadeIn 1s ease-in-out;
+	}     
+</style>
+</head>
+<body>
+	<h1 class="title">Welcome, {{name}}</h1>
+	<h1 style="font-family: 'Read All About It', sans-serif;">Dashboard</h1>
+	<div class="button-wrapper">
+		<form action="{% url 'readr' name=name %}" method="post">{% csrf_token %}
+			<input type="hidden" name="name" value="{{ name }}">
+			<button style="font-family: 'Read All About It', sans-serif;">Let's Chat</button>
+		</form>
+		<form action="{% url 'indexer' name=name %}" method="post">{% csrf_token %}
+			<input type="hidden" name="name" value="{{ name }}">
+			<button style="font-family: 'Read All About It', sans-serif;">Chapter Chat</button>
+		</form>
+		<form action="{% url 'downloads' name=name %}" method="post">{% csrf_token %}
+			<input type="hidden" name="name" value="{{ name }}">
+			<button style="font-family: 'Read All About It', sans-serif;">Downloads</button>
+		</form>
+		<form action="{% url 'logout' %}" method="post">{% csrf_token %}
+			<input type="hidden" name="name" value="{{ name }}">
+			<button style="font-family: 'Read All About It', sans-serif;">Log Out</button>
+		</form>
+	</div>
+	<div class="chatbot-title slideInRight" style="font-family: 'Read All About It', sans-serif;">Unleash the power of reading with our chatbot 'Readr.'</div>
+	<div class="chatbot-text fadeIn" style="font-family: 'Read All About It', sans-serif;animation: slideInRight 1s ease-in-out;">Download your next favorite book with ease, with our ebook chatbot at your fingertips!</div>
+	<div class="developed-by" style="font-family: 'Read All About It', sans-serif; font-weight: bold; margin-top: 50px;">Developed By Sri Balaji and Ramakrishnan</div>
+</body>
+</html>

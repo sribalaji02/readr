@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Readr.</title>
+	<style>
+            .title {
+            font-family: 'Read All About It', sans-serif;
+            font-size: 4em;
+            font-weight: bold;
+            margin-bottom: 50px;
+            color: #000;
+            text-align: center;
+        }
+        .button-wrapper {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 30px;
+            background-color: rgba(0,0,0,0.8);
+        }
+
+        .button-wrapper form {
+            margin: 0;
+        }
+
+        .button-wrapper button {
+            background-color: #000;
+            color: #fff;
+            margin-right: 10px;
+            padding: 0.5em 1em;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .button-wrapper button:hover {
+            background-color: #fefa7d;
+            color: #000000;
+            transform: scale(1.1);
+        }
+
+        .button-wrapper button:active {
+            transform: scale(0.9);
+            box-shadow: 0 5px #666;
+            outline: none;
+        } 
+		
+		body {
+            font-family: 'Read All About It', sans-serif;
+			background-color: #fefa7d;
+		}
+        .centered-text {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 50vh;
+        flex-direction: column;
+        font-size: 1.1em;
+        }
+
+        .text-block {
+            margin-bottom: 30px;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .text-block-bold {
+            font-weight: bold;
+            font-size: 1.5em;
+        }
+        .text-block {
+        transition: all 0.3s ease-in-out;
+        }
+
+        .text-block:hover {
+            color: #000;
+            transform: scale(1.1);
+        }
+        .icon-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #000000;
+    color: #ffffff;
+    position: fixed;
+    bottom: 130px;
+    right: 20px;
+    padding: 10px;
+    border-radius: 50px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.icon-text:hover {
+    background-color: #fefa7d;
+    color: #000000;
+    transform: scale(1.1);
+}
+
+.icon-text img {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+.icon-text span {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+h1 {
+  text-align: center;
+  font-size: 3em;
+}
+
+	</style>
+</head>
+<body>
+
+    <div class="button-wrapper">
+        <form action="{% url 'home' name=name %}" method="post">{% csrf_token %}
+            <button>Back</button>
+        </form>
+    </div>
+    <div>
+        <h1 class = 'title'>User Guide</h1>
+    </div>
+    <div class="centered-text">
+        <div class="text-block text-block-bold">How to interact with Readr.?</div>
+        <div class="text-block">Use "I need a book" or "Can you recommend some books" to request books from Readr.</div>
+        <div class="text-block">Click "Next" to see the next five books.</div>
+        <div class="text-block">Use "Download book (book index number)" or "I want book (book index number)" to get download links for your chosen books.</div>
+        <div class="text-block">Use "I need some details about book (book index)" or "Compare books" to obtain book details or to compare books.</div>
+    </div>
+    </body>
+    </html>
+    <div class="icon-text">Click the below icon to start a conversation</div>
+    
+	<script type="text/javascript">
+        (function (d, m) {
+            var kommunicateSettings = {
+                "appId": "",
+                "onInit": function () {
+                    var iframeStyle = document.createElement('style');
+                    var classSettings = ".change-kommunicate-iframe-height{height:100%!important;width:100%!important;right:0!important;bottom:0!important;max-height: 100%!important;}";
+                    iframeStyle.type = 'text/css';
+                    iframeStyle.innerHTML = classSettings;
+                    document.getElementsByTagName('head')[0].appendChild(iframeStyle);
+                    var launcherIconStyle = "@media(min-width: 510px){.mck-sidebox.fade.in,.mck-box .mck-box-sm{width:100%; height:100%;max-height:100%!important;border-radius:0px!important;}.mck-sidebox{right:0!important;bottom:0!important;}}";
+                    Kommunicate.customizeWidgetCss(launcherIconStyle);
+
+                    var iframe = parent.document.getElementById("kommunicate-widget-iframe"),
+                        launcher = KommunicateGlobal.document.getElementById('mck-sidebox-launcher'),
+                        preChatPopup = KommunicateGlobal.document.querySelector('#chat-popup-widget-container .chat-popup-widget-text-wrapper'),
+                        closeButton = KommunicateGlobal.document.getElementById('km-chat-widget-close-button');
+
+                    [launcher, preChatPopup].forEach(function (element) {
+                        element && element.addEventListener('click', function () {
+                            iframe.classList.add("change-kommunicate-iframe-height");
+                        });
+                    });
+
+                    closeButton.addEventListener('click', function () {
+                        iframe.classList.remove("change-kommunicate-iframe-height");
+                    });
+                },           
+            };
+            
+            var s = document.createElement("script"); s.type = "text/javascript"; s.async = true;
+            s.src = "https://widget.kommunicate.io/v2/kommunicate.app";
+            var h = document.getElementsByTagName("head")[0]; h.appendChild(s);
+            window.kommunicate = m; m._globals = kommunicateSettings;
+        })(document, window.kommunicate || {});
+
+        </script>
+    </body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Readr Login</title>
+	<style>
+	.container {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		height: 100vh;
+		animation: fade-in 1s ease;
+	}
+
+	@keyframes fade-in {
+		from {
+			opacity: 0;
+		}
+		to {
+			opacity: 1;
+		}
+	}
+
+	.title {
+		font-family: 'Read All About It', sans-serif;
+		font-size: 2em;
+		margin-bottom: 50px;
+		color: #000;
+		animation: appear 1s ease;
+	}
+
+	@keyframes appear {
+		from {
+			transform: translateY(50%);
+			opacity: 0;
+		}
+		to {
+			transform: translateY(0);
+			opacity: 1;
+		}
+	}
+
+	button.signup-button {
+		background-color: #000;
+		color: #fff;
+		padding: 10px 20px;
+		margin-top: 20px;
+		font-size: 1.2em;
+		border: none;
+		border-radius: 20px;
+		box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+		cursor: pointer;
+		transition: background-color 0.2s ease;
+		animation: appear 1s ease;
+	}
+
+	button.signup-button a {
+		color: #fff;
+		text-shadow: 1px 1px 1px #000;
+		text-decoration: none;
+	}
+
+	button.signup-button:hover {
+		background-color: #333;
+	}
+
+	p.signup-link {
+		display: flex;
+		align-items: center;
+		margin-top: 30px;
+		font-size: 1.2em;
+		color: #666;
+		animation: appear 1s ease;
+	}
+
+	p.signup-link:before {
+		content: "Don't have an account yet?";
+		margin-right: 10px;
+	}
+
+	a {
+		color: #000;
+		font-weight: bold;
+		text-decoration: none;
+		transition: color 0.2s ease;
+	}
+
+	a:hover {
+		color: #333;
+	}
+
+	body {
+		background-color: #fefa7d;
+	}
+	</style>
+	<link href="https://fonts.googleapis.com/css2?family=Read+All+About+It&display=swap" rel="stylesheet">
+</head>
+<body>
+	<div class="container">
+		<h1 class="title">Sorry, Your Login Credentials are Invalid ! Please try again.</h1>
+		
+		<button type="button" class="signup-button"><a href="{% url 'login' %}">Retry</a></button>
+
+		<p class="signup-link"></p>
+	</div>
+</body>
+</html>

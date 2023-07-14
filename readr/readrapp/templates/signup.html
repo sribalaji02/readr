@@ -1,0 +1,138 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Readr Signup</title>
+	<style>
+	.container {
+		margin: 0 auto;
+		max-width: 600px;
+		text-align: center;
+		animation: fade-in 1s ease;
+	}
+
+	@keyframes fade-in {
+		from {
+			opacity: 0;
+		}
+		to {
+			opacity: 1;
+		}
+	}
+
+	.logo {
+		max-width: 200px;
+		margin-bottom: 50px;
+	}
+
+	.title {
+		font-family: 'Read All About It', sans-serif;
+		font-size: 4em;
+		margin-bottom: 50px;
+		color: #000;
+	}
+
+	.signup-form {
+		display: inline-block;
+		text-align: left;
+		animation: appear 1s ease;
+	}
+
+	@keyframes appear {
+		from {
+			transform: translateY(50%);
+			opacity: 0;
+		}
+		to {
+			transform: translateY(0);
+			opacity: 1;
+		}
+	}
+
+	label {
+		display: block;
+		margin-bottom: 10px;
+		font-size: 1.2em;
+		color: #333;
+	}
+
+	input[type="text"], input[type="email"], input[type="password"] {
+		display: block;
+		width: 100%;
+		padding: 10px;
+		margin-bottom: 20px;
+		font-size: 1.2em;
+		border: none;
+		border-radius: 5px;
+		box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+		animation: appear 1s ease;
+	}
+
+	button.signup-button {
+		background-color: #000;
+		color: #fff;
+		padding: 10px 20px;
+        margin-left: 90px;
+        margin-top: 20px;
+		font-size: 1.2em;
+		border: none;
+		border-radius: 20px;
+		box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+		cursor: pointer;
+		transition: background-color 0.2s ease;
+		animation: appear 1s ease;
+	}
+	img {
+		position: relative;
+  		bottom: 100;
+  		left: 100;
+	}
+
+	button.signup-button:hover {
+		background-color: #333;
+	}
+
+	p.login-link {
+		margin-top: 30px;
+		font-size: 1.2em;
+		color: #666;
+		animation: appear 1s ease;
+	}
+
+	a {
+		color: #000;
+		font-weight: bold;
+		text-decoration: none;
+		transition: color 0.2s ease;
+	}
+
+	a:hover {
+		color: #333;
+	}
+
+	body {
+		background-color: #fefa7d;
+	}
+	</style>
+	<link href="https://fonts.googleapis.com/css2?family=Read+All+About+It&display=swap" rel="stylesheet">
+</head>
+<body>
+	<div class="container">
+		<h1 class="img"><img src="{% static 'Readr.png' %}" alt="Readr logo" width="200px" height="200px"></h1>
+		<form action="{% url 'signup' %}" class="signup-form" method="post">{% csrf_token %}
+			<label for="username">Username</label>
+			<input type="text" id="username" name="username" required>
+
+			<label for="email">Email ID</label>
+			<input type="email" id="email" name="email" required>
+
+			<label for="password">Password</label>
+			<input type="password" id="password" name="password" required>
+
+			<button type="submit" class="signup-button">Sign up</button>
+	</form>
+
+	    <p class="login-link">Already have an account? <a href="{% url 'login' %}">Log in to Account</a></p>
+	</div>
+</body>
+</html>
