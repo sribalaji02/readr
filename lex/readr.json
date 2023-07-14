@@ -1,0 +1,356 @@
+{
+  "metadata": {
+    "schemaVersion": "1.0",
+    "importType": "LEX",
+    "importFormat": "JSON"
+  },
+  "resource": {
+    "name": "Readr",
+    "version": "26",
+    "intents": [
+      {
+        "name": "getNextBookSet",
+        "version": "2",
+        "fulfillmentActivity": {
+          "codeHook": {
+            "uri": "",
+            "messageVersion": "1.0"
+          },
+          "type": "CodeHook"
+        },
+        "sampleUtterances": [
+          "next set",
+          "next"
+        ],
+        "slots": []
+      },
+      {
+        "name": "elaborateBook",
+        "version": "2",
+        "fulfillmentActivity": {
+          "codeHook": {
+            "uri": "",
+            "messageVersion": "1.0"
+          },
+          "type": "CodeHook"
+        },
+        "sampleUtterances": [
+          "I need some details about the book",
+          "I need some details about the book {book_index_elab}"
+        ],
+        "slots": [
+          {
+            "sampleUtterances": [],
+            "slotType": "AMAZON.NUMBER",
+            "obfuscationSetting": "NONE",
+            "slotConstraint": "Required",
+            "valueElicitationPrompt": {
+              "messages": [
+                {
+                  "contentType": "PlainText",
+                  "content": "Okay Sure, provide me the book index so I can help you out."
+                }
+              ],
+              "maxAttempts": 2
+            },
+            "priority": 1,
+            "name": "book_index_elab"
+          }
+        ]
+      },
+      {
+        "name": "Greeting",
+        "version": "10",
+        "fulfillmentActivity": {
+          "type": "ReturnIntent"
+        },
+        "sampleUtterances": [
+          "Hello",
+          "Hi",
+          "Yo",
+          "Hey",
+          "Hey Readr",
+          "Howdy",
+          "kmConversationStarted"
+        ],
+        "slots": [],
+        "conclusionStatement": {
+          "responseCard": "{\"version\":1,\"contentType\":\"application/vnd.amazonaws.card.generic\",\"genericAttachments\":[{\"title\":\"\",\"buttons\":[{\"text\":\"Need books?\",\"value\":\"I need a book\"}]}]}",
+          "messages": [
+            {
+              "groupNumber": 1,
+              "contentType": "PlainText",
+              "content": "Oh hey there! How may I help you?"
+            },
+            {
+              "groupNumber": 1,
+              "contentType": "PlainText",
+              "content": "Hi this is Readr. how may I help you?"
+            }
+          ]
+        }
+      },
+      {
+        "name": "getHelp",
+        "version": "1",
+        "fulfillmentActivity": {
+          "codeHook": {
+            "uri": "",
+            "messageVersion": "1.0"
+          },
+          "type": "CodeHook"
+        },
+        "sampleUtterances": [
+          "Help",
+          "Commands"
+        ],
+        "slots": []
+      },
+      {
+        "name": "compareBook",
+        "version": "3",
+        "fulfillmentActivity": {
+          "codeHook": {
+            "uri": "",
+            "messageVersion": "1.0"
+          },
+          "type": "CodeHook"
+        },
+        "sampleUtterances": [
+          "Compare books"
+        ],
+        "slots": [
+          {
+            "sampleUtterances": [],
+            "slotType": "AMAZON.NUMBER",
+            "obfuscationSetting": "NONE",
+            "slotConstraint": "Required",
+            "valueElicitationPrompt": {
+              "messages": [
+                {
+                  "contentType": "PlainText",
+                  "content": "Okay sure, provide the first book index."
+                }
+              ],
+              "maxAttempts": 2
+            },
+            "priority": 1,
+            "name": "book_one"
+          },
+          {
+            "sampleUtterances": [],
+            "slotType": "AMAZON.NUMBER",
+            "obfuscationSetting": "NONE",
+            "slotConstraint": "Required",
+            "valueElicitationPrompt": {
+              "messages": [
+                {
+                  "contentType": "PlainText",
+                  "content": "Okay now, provide the second book index."
+                }
+              ],
+              "maxAttempts": 2
+            },
+            "priority": 2,
+            "name": "book_two"
+          }
+        ]
+      },
+      {
+        "name": "getBookName",
+        "version": "23",
+        "fulfillmentActivity": {
+          "codeHook": {
+            "uri": "",
+            "messageVersion": "1.0"
+          },
+          "type": "CodeHook"
+        },
+        "sampleUtterances": [
+          "Can you recommend some books",
+          "Can you recommend some study materials",
+          "Can you recommend some reference materials",
+          "Can you recommend some guides",
+          "I need some books",
+          "I need some study materials",
+          "I need some reference materials",
+          "I want some guides",
+          "Reference materials",
+          "Guides",
+          "Books",
+          "Study materials",
+          "Need book"
+        ],
+        "slots": [
+          {
+            "sampleUtterances": [],
+            "slotType": "book_ext",
+            "slotTypeVersion": "1",
+            "obfuscationSetting": "NONE",
+            "slotConstraint": "Required",
+            "valueElicitationPrompt": {
+              "messages": [
+                {
+                  "contentType": "PlainText",
+                  "content": "Okay, specify the book extension (pdf/epub)"
+                }
+              ],
+              "maxAttempts": 2
+            },
+            "priority": 2,
+            "name": "book_ext"
+          },
+          {
+            "sampleUtterances": [],
+            "slotType": "AMAZON.Book",
+            "obfuscationSetting": "NONE",
+            "slotConstraint": "Required",
+            "valueElicitationPrompt": {
+              "messages": [
+                {
+                  "contentType": "PlainText",
+                  "content": "Okay sure, tell me what book you need?"
+                },
+                {
+                  "contentType": "PlainText",
+                  "content": "Okay sure, provide me with the name of the book that you're intrested in."
+                }
+              ],
+              "responseCard": "{\"version\":1,\"contentType\":\"application/vnd.amazonaws.card.generic\"}",
+              "maxAttempts": 2
+            },
+            "priority": 1,
+            "defaultValueSpec": {
+              "defaultValueList": []
+            },
+            "name": "book_name"
+          }
+        ],
+        "outputContexts": [
+          {
+            "turnsToLive": 5,
+            "timeToLiveInSeconds": 3600,
+            "name": "book_name_fixed"
+          }
+        ]
+      },
+      {
+        "name": "getNextBook",
+        "version": "18",
+        "fulfillmentActivity": {
+          "codeHook": {
+            "uri": "",
+            "messageVersion": "1.0"
+          },
+          "type": "CodeHook"
+        },
+        "sampleUtterances": [
+          "Next"
+        ],
+        "slots": [],
+        "inputContexts": [
+          {
+            "name": "book_name_fixed"
+          }
+        ]
+      },
+      {
+        "name": "getBookLink",
+        "version": "15",
+        "fulfillmentActivity": {
+          "codeHook": {
+            "uri": "",
+            "messageVersion": "1.0"
+          },
+          "type": "CodeHook"
+        },
+        "sampleUtterances": [
+          "I want book {book_index}",
+          "Download book {book_index}",
+          "I want link for {book_index}",
+          "Download the above book",
+          "{book_index}"
+        ],
+        "slots": [
+          {
+            "sampleUtterances": [],
+            "slotType": "AMAZON.NUMBER",
+            "obfuscationSetting": "NONE",
+            "slotConstraint": "Required",
+            "valueElicitationPrompt": {
+              "messages": [
+                {
+                  "contentType": "PlainText",
+                  "content": "Okay, specify the book index number."
+                },
+                {
+                  "contentType": "PlainText",
+                  "content": "Okay, mention the book index that you're interested in. "
+                }
+              ],
+              "responseCard": "{\"version\":1,\"contentType\":\"application/vnd.amazonaws.card.generic\",\"genericAttachments\":[{\"title\":\"Python\",\"subTitle\":\"null\",\"imageUrl\":\"https://fastly.picsum.photos/id/11/2500/1667.jpg?hmac=xxjFJtAPgshYkysU_aqx2sZir-kIOjNR9vx0te7GycQ\",\"attachmentLinkUrl\":\"null\",\"buttons\":[{\"text\":\"Download\",\"value\":\"Download\"}]}]}",
+              "maxAttempts": 2
+            },
+            "priority": 1,
+            "defaultValueSpec": {
+              "defaultValueList": []
+            },
+            "name": "book_index"
+          }
+        ]
+      }
+    ],
+    "slotTypes": [
+      {
+        "name": "book_ext",
+        "version": "1",
+        "enumerationValues": [
+          {
+            "value": "pdf"
+          },
+          {
+            "value": "PDF"
+          },
+          {
+            "value": "Pdf"
+          },
+          {
+            "value": "epub"
+          },
+          {
+            "value": "EPUB"
+          },
+          {
+            "value": "Epub"
+          }
+        ],
+        "valueSelectionStrategy": "TOP_RESOLUTION"
+      }
+    ],
+    "voiceId": "Matthew",
+    "childDirected": false,
+    "locale": "en-US",
+    "idleSessionTTLInSeconds": 60,
+    "description": "Bot for downloading E-Books",
+    "clarificationPrompt": {
+      "messages": [
+        {
+          "contentType": "PlainText",
+          "content": "Sorry, can you please repeat that? (Tip: Type 'Help' or 'Commands' to display all available commands present.)"
+        }
+      ],
+      "maxAttempts": 2
+    },
+    "abortStatement": {
+      "messages": [
+        {
+          "contentType": "PlainText",
+          "content": "Sorry, I could not understand. Goodbye."
+        }
+      ]
+    },
+    "detectSentiment": false,
+    "nluIntentConfidenceThreshold": 0.5,
+    "enableModelImprovements": true
+  }
+}
